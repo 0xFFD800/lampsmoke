@@ -1,46 +1,57 @@
 from player import player
 
 class Cutscenes :
-    obj = None
-    upcoming = []
-    num = 0
+    def __init__(self) :
+        self.obj = None
+        self.upcoming = []
+        self.num = 0
 
 class Cam :
-    pos = [ 0, 0 ]
-    pPos = [ 0, 0 ]
-    minPos = [ 570, -80 ]
-    maxPos = [ 2970, 1520 ]
+    def __init__(self) :
+        self.pos = [ 0, 0 ]
+        self.pPos = [ 0, 0 ]
+        self.minPos = [ 570, -80 ]
+        self.maxPos = [ 2970, 1520 ]
 
 class UI :
-    mode = 'loading'
+    def __init__(self) :
+        self.mode = 'loading'
+        
+        self.paused = False
+        self.pmTab = 0
+        self.pmTabs = []
+        
+        self.images = []
+        self.buttons = []
+        
+        self.scanner = False
+        
+        self.shop = None
+        self.shopSelected = 0
+        self.lastBoughtItem = None
+        
+        self.shake = 0
+        self.game_over = -1
+        
+        self.transit = 0
+        self.transitTo = 0
+        self.transitPos = None
+    
+        self.width_static = 600
+        self.height_static = 400
+        
+        self.cutscene = Cutscene()
+    
+    def has_focus(self) :
+        return !self.paused and !self.cutscene.obj and self.transit <= 0 and self.game_over < 0
+    
+    def should_draw_overlay(self) :
+        return self.paused or (player.itemInUse and player.itemInUse.throwable())
 
-    paused = False
-    pmTab = 0
-    pmTabs = []
+class Controls :
+    def __init__(self) :
+        self.dPressed = False # Pun not intended.
+        self.aPressed = False
     
-    images = []
-    buttons = []
-    
-    scanner = False
-    
-    shop = None
-    shopSelected = 0
-    lastBoughtItem = None
-    
-    shake = 0
-    game_over = -1
-    
-    transit = 0
-    transitTo = 0
-    transitPos = None
-
-    width_static = 600
-    height_static = 400
-    
-    cutscene = Cutscene()
-    
-    def has_focus() :
-        return !paused and !cutscene.obj and transit <= 0 and game_over < 0
-    
-    def should_draw_overlay() :
-        return paused or (player.itemInUse and player.itemInUse.throwable())
+        self.debug1Pressed = False
+        self.debug2Pressed = False
