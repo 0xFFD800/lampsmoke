@@ -5,7 +5,7 @@ class Graphics :
         self.images = dict()
 
     def load_graphics(self) :
-        for img in self.images.values():
+        for img in self.images.values().values():
             img.load()
 
     def dir_images(self, group, path) :
@@ -39,9 +39,10 @@ class LoadedImage(Image) :
         self.img = loadImage(self.file)
 
 class GraphicsImage(Image) :
-    def __init__(self, n, dF, sX, sY) :
+    def __init__(self, n, g, dF, sX, sY) :
         Image.__init__(self)
         self.name = n
+        self.group = g
         self.draw_func = dF
         self.size_x = sX
         self.size_y = sY

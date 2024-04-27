@@ -16,7 +16,7 @@ class BG(StrEnum) :
 
     @property
     def images(self) :
-        return g.graphics.images.get(self, { self: g.GraphicsImage(self, bg_func[self], 3200, 400) }) #FIX DIMENSIONS
+        return g.graphics.images.get(self, { self: g.GraphicsImage(self, self, bg_func[self], 3200, 400) }) 
 
     @property
     def image(self) :
