@@ -5,8 +5,9 @@ class Graphics :
         self.images = dict()
 
     def load_graphics(self) :
-        for img in self.images.values().values():
-            img.load()
+        for group in self.images.values() :
+            for img in group.values :
+                img.load()
 
     def dir_images(self, group, path) :
         imgs = dict()
