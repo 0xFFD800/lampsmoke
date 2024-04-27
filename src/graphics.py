@@ -1,42 +1,55 @@
+import os
+
 class Graphics :
     def __init__(self) :
-        self.images = []
+        self.images = dict()
 
     def load_graphics(self) :
-        pass
+        for img in self.images.values():
+            img.load()
+
+    def dir_images(self, group, path) :
+        imgs = dict()
+        for filename in os.listdir(path) :
+            name, ext = filename.split('.')
+            imgs[name] = LoadedImage(name, group, path + '/' + filename)
+        return imgs
+
 
 graphics = Graphics()
 
 class Image :
     def __init__(self) :
-        img = None
-
-class LoadedImage(Image) :
-    def __init__(self, f) :
-        Image.__init__(self)
-        self.file = f
-        graphics.images.append(self)
+        self.img = None
 
     def load(self) :
+        pass
+
+class LoadedImage(Image) :
+    def __init__(self, n, g, f) :
+        Image.__init__(self)
+        self.name = n
+        self.group = g
+        self.file = f
+        imggroup = graphics.images.setdefault(g, dict())
+        imggroup[n] = self
+
+    def load(self) :
+        Image.load(self)
         self.img = loadImage(self.file)
 
 class GraphicsImage(Image) :
-    def __init__(self, dF, sX, sY) :
+    def __init__(self, n, dF, sX, sY) :
         Image.__init__(self)
+        self.name = n
         self.draw_func = dF
         self.size_x = sX
         self.size_y = sY
-        graphics.images.append(self)
+        imggroup = graphics.images.setdefault(g, dict())
+        imggroup[n] = self
 
     def load(self) :
+        Image.load(self)
         gObj = createGraphics(self.size_x, self.size_y, JAVA2D)
         self.draw_func(gObj)
         self.img = gObj.get()
-
-def draw_tree(g, x, y, t) :
-    g.fill(87, 54, 24)
-    g.rect(x - 5, y + (t * 10), 10, 30)
-    g.fill(0, 97, 0)
-    
-    for i in range(t) :
-        g.triangle(x - 15, y + 10 + (i * 15), x + 15, y + 10 + (i * 15), x, y - 15 + (i * 15))
