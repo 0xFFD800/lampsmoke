@@ -6,7 +6,7 @@ class Graphics :
 
     def load_graphics(self) :
         for group in self.images.values() :
-            for img in group.values :
+            for img in group.values() :
                 img.load()
 
     def dir_images(self, group, path) :
