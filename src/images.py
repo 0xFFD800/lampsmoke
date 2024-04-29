@@ -116,6 +116,7 @@ fx_img_path = 'res/fx'
 class FX(StrEnum) :
     attack_sweep        = auto()
     cog_shield          = auto()
+    dark                = auto()
     disappear_char      = auto()
     disappear_fire      = auto()
     disappear_ice       = auto()
@@ -126,24 +127,32 @@ class FX(StrEnum) :
     hurt_hostile        = auto()
     hurt_player         = auto()
     interact_hint       = auto()
+    recticle            = auto()
     ribbamech_flame     = auto()
         
     @property
     def images(self) :
         return g.graphics.images.get(self, g.graphics.dir_images(self, fx_img_path + self)) 
+    
+    @property
+    def image(self) :
+        return self.images['anim']
 
 ui_img_path = 'res/ui'
 class UI(StrEnum) :
-    dark                = auto()
+    buttons             = auto()
+    hud                 = auto()
     parttransitionbox   = auto()
+    pause_menu          = auto()
+    shop_inridge        = auto()
 
     @property
     def images(self) :
-        return g.graphics.images.get(self, { self: g.LoadedImage(self, self, ui_img_path + self + '.png') }) 
-
+        return g.graphics.images.get(self, g.graphics.dir_images(self, ui_img_path + self)) 
+    
     @property
     def image(self) :
-        return self.images[self]
+        return self.images['anim']
 
 bg_func = { BG.hills_trees: bg_hills_trees }
 
