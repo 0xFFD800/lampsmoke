@@ -144,7 +144,7 @@ class UI(StrEnum) :
     hud                 = auto()
     parttransitionbox   = auto()
     pause_menu          = auto()
-    shop_inridge        = auto()
+    shops               = auto()
 
     @property
     def images(self) :
