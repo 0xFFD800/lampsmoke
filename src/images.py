@@ -81,6 +81,16 @@ class Decoration(StrEnum) :
     def images(self) :
         return g.graphics.images.get(self, g.graphics.dir_images(self, deco_img_path + self)) 
 
+deco_img_path = 'res/deco'
+class Deco(StrEnum) :
+    bookshelf       = auto()
+    candle_sconce   = auto()
+    cloud           = auto()
+
+    @property
+    def images(self) :
+        return g.graphics.images.get(self, g.graphics.dir_images(self, deco_img_path + self))
+
 equip_img_path = 'res/inventory/equipment'
 class Equipment(StrEnum) :
     battleaxe       = auto()
